@@ -1,0 +1,54 @@
+<ng-container *ngIf="addBookMutation.result$ | async as addBookResult">
+  <div class="blurry-bg" *ngIf="addBookResult.isLoading">
+    <app-spinner></app-spinner>
+  </div>
+  <form [formGroup]="bookForm" class="form" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <mat-label>Название</mat-label>
+      <input matInput type="text" formControlName="title" />
+      <mat-error *ngIf="bookForm.controls.title.errors?.['required']"
+        >Название обязательно</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field
+      *ngFor="let author of bookForm.controls.authors.controls; let i = index"
+    >
+      <mat-label>Автор {{ i > 0 ? "#" + (i + 1) : "" }}</mat-label>
+      <input matInput type="text" [formControl]="author" />
+      <button *ngIf="i > 0" mat-icon-button matSuffix (click)="removeAuthor(i)">
+        <mat-icon color="accent">delete</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <button
+      type="button"
+      (click)="addAuthor()"
+      mat-stroked-button
+      color="accent"
+    >
+      Добавить автора
+    </button>
+
+    <mat-form-field>
+      <mat-label>Год публикации</mat-label>
+      <input matInput type="number" formControlName="year" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Рейтинг</mat-label>
+      <input matInput type="number" formControlName="rating" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>ISBN</mat-label>
+      <input matInput type="text" formControlName="ISBN" />
+      <mat-hint>Используйте дефис как разделитель</mat-hint>
+      <mat-error>asdsdadds</mat-error>
+    </mat-form-field>
+
+    <button type="submit" mat-raised-button color="accent">
+      Добавить книгу
+    </button>
+  </form>
+</ng-container>

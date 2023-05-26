@@ -1,0 +1,32 @@
+<ng-container *ngIf="books$ | async as books">
+  <span *ngIf="books.isError">Что-то пошло не так</span>
+  <app-spinner *ngIf="books.isFetching"></app-spinner>
+  <mat-list *ngIf="books.data" class="list">
+    <ng-container
+      *ngIf="books.data | groupBy : 'year' | sort : true as bookGroups"
+    >
+      <ng-container *ngFor="let tuple of bookGroups">
+        <div mat-subheader>
+          {{ tuple[0] ?? "Год не указан" }}
+        </div>
+        <mat-card *ngFor="let item of tuple[1] | sortBy : 'title'" class="card">
+          <mat-card-header>
+            <mat-card-title>
+              {{ item.title }}
+            </mat-card-title>
+            <mat-card-subtitle *ngIf="item.year">
+              {{ item.year }}
+            </mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <h3>{{ item.authors.join(", ") }}</h3>
+            <p *ngIf="item.rating !== null">
+              Рейтинг: {{ item.rating }}/{{ maxRating }}
+            </p>
+            <p *ngIf="item.ISBN">{{ item.ISBN.join("-") }}</p>
+          </mat-card-content>
+        </mat-card>
+      </ng-container>
+    </ng-container>
+  </mat-list>
+</ng-container>

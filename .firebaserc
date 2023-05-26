@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "ng-fire-book-1384f": {
+      "hosting": {
+        "ng-fire-book": [
+          "ng-fire-book-1384f"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "ng-fire-book-1384f"
+  }
+}
