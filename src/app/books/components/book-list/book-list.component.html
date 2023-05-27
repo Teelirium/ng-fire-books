@@ -16,37 +16,14 @@
           <div mat-subheader>
             {{ tuple[0] ?? "Год не указан" }}
           </div>
-          <mat-card
+          <app-book-card
             *ngFor="let item of tuple[1] | sortBy : 'title'"
             class="card"
             [id]="item.id"
-          >
-            <mat-card-header>
-              <mat-card-title>
-                {{ item.title }}
-              </mat-card-title>
-              <mat-card-subtitle *ngIf="item.year">
-                {{ item.year }}
-              </mat-card-subtitle>
-            </mat-card-header>
-            <mat-card-content>
-              <p>{{ item.authors.join(", ") }}</p>
-              <p *ngIf="item.rating !== null">
-                Рейтинг: {{ item.rating }}/{{ maxRating }}
-              </p>
-              <p *ngIf="item.ISBN">{{ item.ISBN.join("-") }}</p>
-            </mat-card-content>
-            <mat-card-actions align="start">
-              <button
-                type="button"
-                (click)="deleteBook(item.id)"
-                mat-icon-button
-                color="accent"
-              >
-                <mat-icon>delete</mat-icon>
-              </button>
-            </mat-card-actions>
-          </mat-card>
+            [book]="item"
+            [showDelete]="true"
+            (handleDelete)="deleteBook($event)"
+          ></app-book-card>
         </ng-container>
       </ng-container>
     </mat-list>

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { BookDto, MAX_RATING } from '../../models/Book';
 
 @Component({
@@ -8,6 +8,11 @@ import { BookDto, MAX_RATING } from '../../models/Book';
 })
 export class BookCardComponent {
   @Input() book?: BookDto;
-  @Input() handleDelete?: (id: string) => void;
+  @Input() showDelete: boolean = false;
+  @Output() handleDelete = new EventEmitter<string>();
   maxRating = MAX_RATING;
+
+  deleteBook(bookId: string) {
+    this.handleDelete.emit(bookId);
+  }
 }

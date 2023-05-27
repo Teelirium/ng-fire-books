@@ -18,6 +18,9 @@
         >Автор<ng-container *ngIf="i > 0"> {{ i + 1 }}</ng-container></mat-label
       >
       <input matInput type="text" [formControl]="author" />
+      <mat-error *ngIf="author.errors?.['required']"
+        >Имя автора обязательно</mat-error
+      >
       <button *ngIf="i > 0" mat-icon-button matSuffix (click)="removeAuthor(i)">
         <mat-icon color="accent">delete</mat-icon>
       </button>
@@ -35,18 +38,32 @@
     <mat-form-field>
       <mat-label>Год публикации</mat-label>
       <input matInput type="number" formControlName="year" />
+      <mat-error *ngIf="bookForm.controls.year.errors?.['min']"
+        >Год публикации должен быть не раньше 1800</mat-error
+      >
+      <mat-error *ngIf="bookForm.controls.year.errors?.['max']"
+        >Год публикации должен быть не позже текущего</mat-error
+      >
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Рейтинг</mat-label>
       <input matInput type="number" formControlName="rating" />
+      <mat-error *ngIf="bookForm.controls.rating.errors?.['min']"
+        >Рейтинг должен быть положительным</mat-error
+      >
+      <mat-error *ngIf="bookForm.controls.rating.errors?.['max']"
+        >Рейтинг не может превышать 10</mat-error
+      >
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>ISBN</mat-label>
       <input matInput type="text" formControlName="ISBN" />
       <mat-hint>Используйте дефис как разделитель</mat-hint>
-      <mat-error>asdsdadds</mat-error>
+      <mat-error *ngIf="bookForm.controls.ISBN.errors?.['invalid']"
+        >Данный ISBN не валиден</mat-error
+      >
     </mat-form-field>
 
     <button type="submit" mat-raised-button color="accent">

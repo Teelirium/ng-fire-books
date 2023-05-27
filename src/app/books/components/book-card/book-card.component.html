@@ -14,10 +14,10 @@
     </p>
     <p *ngIf="book.ISBN">{{ book.ISBN.join("-") }}</p>
   </mat-card-content>
-  <mat-card-actions align="start" *ngIf="handleDelete">
+  <mat-card-actions align="start" *ngIf="showDelete">
     <button
       type="button"
-      (click)="handleDelete(book.id)"
+      (click)="deleteBook(book.id)"
       mat-icon-button
       color="accent"
     >
