@@ -1,6 +1,6 @@
 {
-  "name": "ng-fire-book",
-  "version": "0.0.0",
+  "name": "ng-fire-books",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
