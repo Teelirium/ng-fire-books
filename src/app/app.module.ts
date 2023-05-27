@@ -29,6 +29,7 @@ import { GroupByPipe } from './shared/pipes/group-by.pipe';
 import { SortByPipe } from './shared/pipes/sort-by.pipe';
 import { SortPipe } from './shared/pipes/sort.pipe';
 import { BlurryBgComponent } from './shared/components/blurry-bg/blurry-bg.component';
+import { BookCardComponent } from './books/components/book-card/book-card.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,6 +43,7 @@ import { BlurryBgComponent } from './shared/components/blurry-bg/blurry-bg.compo
     SortPipe,
     SortByPipe,
     BlurryBgComponent,
+    BookCardComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,27 @@
+<mat-card *ngIf="book" class="card" [id]="book.id">
+  <mat-card-header>
+    <mat-card-title>
+      {{ book.title }}
+    </mat-card-title>
+    <mat-card-subtitle *ngIf="book.year">
+      {{ book.year }}
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p>{{ book.authors.join(", ") }}</p>
+    <p *ngIf="book.rating !== null">
+      Рейтинг: {{ book.rating }}/{{ maxRating }}
+    </p>
+    <p *ngIf="book.ISBN">{{ book.ISBN.join("-") }}</p>
+  </mat-card-content>
+  <mat-card-actions align="start" *ngIf="handleDelete">
+    <button
+      type="button"
+      (click)="handleDelete(book.id)"
+      mat-icon-button
+      color="accent"
+    >
+      <mat-icon>delete</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>

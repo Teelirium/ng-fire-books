@@ -1,8 +1,9 @@
 import { ViewportScroller } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { tap } from 'rxjs';
+import { Subject, takeUntil, tap } from 'rxjs';
 import { BooksService } from 'src/app/books/services/books.service';
+import { randomInt } from 'src/app/shared/util/randomInt';
 import { BookDto, MAX_RATING } from '../../models/Book';
 
 @Component({
@@ -12,11 +13,40 @@ import { BookDto, MAX_RATING } from '../../models/Book';
 })
 export class BookListComponent {
   maxRating = MAX_RATING;
+
   private booksService = inject(BooksService);
   books$ = this.booksService.getAll().result$;
+
+  recommendedBook?: BookDto;
+
   deleteBookMutation = this.booksService.deleteBook();
 
-  ngOnInit() {}
+  private unsub$ = new Subject<void>();
+
+  ngOnInit() {
+    this.books$.pipe(takeUntil(this.unsub$)).subscribe((books) => {
+      if (!books.data) {
+        return;
+      }
+      const currentYear = new Date().getFullYear();
+      const oldEnough = books.data.filter((book) => {
+        if (!book.year) return false;
+        return currentYear - book.year >= 3;
+      });
+      const maxRating = oldEnough.reduce(
+        (prev, curr) =>
+          curr.rating !== null && curr.rating > prev ? curr.rating : prev,
+        0
+      );
+      const recommended = oldEnough.filter((b) => b.rating === maxRating);
+      this.recommendedBook = recommended[randomInt(recommended.length)];
+    });
+  }
+
+  ngOnDestroy() {
+    this.unsub$.next();
+    this.unsub$.complete();
+  }
 
   deleteBook(bookId: string) {
     this.deleteBookMutation.mutate(bookId);

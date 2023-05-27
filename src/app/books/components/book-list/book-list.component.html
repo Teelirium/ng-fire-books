@@ -5,6 +5,10 @@
       <app-spinner></app-spinner>
     </app-blurry-bg>
     <mat-list *ngIf="books.data" class="list">
+      <ng-container *ngIf="recommendedBook">
+        <div mat-subheader>Рекомендованая книга</div>
+        <app-book-card [book]="recommendedBook"></app-book-card>
+      </ng-container>
       <ng-container
         *ngIf="books.data | groupBy : 'year' | sort : true as bookGroups"
       >
