@@ -28,6 +28,7 @@ import { SpinnerComponent } from './shared/components/spinner/spinner.component'
 import { GroupByPipe } from './shared/pipes/group-by.pipe';
 import { SortByPipe } from './shared/pipes/sort-by.pipe';
 import { SortPipe } from './shared/pipes/sort.pipe';
+import { BlurryBgComponent } from './shared/components/blurry-bg/blurry-bg.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,6 +41,7 @@ import { SortPipe } from './shared/pipes/sort.pipe';
     GroupByPipe,
     SortPipe,
     SortByPipe,
+    BlurryBgComponent,
   ],
   imports: [
     BrowserModule,

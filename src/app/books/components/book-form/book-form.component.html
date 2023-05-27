@@ -1,7 +1,7 @@
 <ng-container *ngIf="addBookMutation.result$ | async as addBookResult">
-  <div class="blurry-bg" *ngIf="addBookResult.isLoading">
+  <app-blurry-bg *ngIf="addBookResult.isLoading">
     <app-spinner></app-spinner>
-  </div>
+  </app-blurry-bg>
   <form [formGroup]="bookForm" class="form" (ngSubmit)="onSubmit()">
     <mat-form-field>
       <mat-label>Название</mat-label>

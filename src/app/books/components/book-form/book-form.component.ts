@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { docData } from '@angular/fire/firestore';
 import {
   AbstractControl,
   FormArray,
@@ -9,7 +10,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { BookFormDto, MAX_RATING } from 'src/app/books/models/Book';
+import { Observable } from 'rxjs';
+import { BookDto, BookFormDto, MAX_RATING } from 'src/app/books/models/Book';
 import { BooksService } from '../../services/books.service';
 import { isValidISBN } from '../../util/isValidISBN';
 
@@ -64,10 +66,10 @@ export class BookFormComponent {
       ISBN: value.ISBN ? value.ISBN.split('-') : null,
     } satisfies BookFormDto;
 
-    console.log(newBook);
+    console.log('Adding book:', newBook);
 
-    this.addBookMutation.mutate(newBook).then(() => {
-      this.router.navigate(['/']);
+    this.addBookMutation.mutate(newBook).then((document) => {
+      this.router.navigate([`/`], { fragment: document.id });
     });
   }
 

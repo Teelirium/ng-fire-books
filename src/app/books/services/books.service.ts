@@ -4,11 +4,12 @@ import {
   addDoc,
   collection,
   collectionData,
+  deleteDoc,
   doc,
   docData,
 } from '@angular/fire/firestore';
 import { QueryClientService, UseMutation, UseQuery } from '@ngneat/query';
-import { Observable, defer, from } from 'rxjs';
+import { Observable, defer, from, map } from 'rxjs';
 import { BookDto, BookFormDto } from '../models/Book';
 
 @Injectable({
@@ -46,8 +47,8 @@ export class BooksService {
   getById(bookId: string) {
     //TODO
     return this.useQuery(this.getByIdKey(bookId), () => {
-      const bookDocument = doc(this.store, this.collectionName);
-      return docData(bookDocument, { idField: 'id' });
+      const bookDocument = doc(this.store, this.collectionName, bookId);
+      return docData(bookDocument, { idField: 'id' }) as Observable<BookDto>;
     });
   }
 
@@ -56,6 +57,20 @@ export class BooksService {
       (book: BookFormDto) => {
         const bookCollection = collection(this.store, this.collectionName);
         return defer(() => from(addDoc(bookCollection, book)));
+      },
+      {
+        onSuccess: () => {
+          this.queryClient.invalidateQueries(this.getAllKey());
+        },
+      }
+    );
+  }
+
+  deleteBook() {
+    return this.useMutation(
+      (bookId: string) => {
+        const bookDocument = doc(this.store, this.collectionName, bookId);
+        return defer(() => from(deleteDoc(bookDocument)));
       },
       {
         onSuccess: () => {
