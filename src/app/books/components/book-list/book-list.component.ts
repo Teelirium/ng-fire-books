@@ -1,7 +1,5 @@
-import { ViewportScroller } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
-import { Subject, takeUntil, tap } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { BooksService } from 'src/app/books/services/books.service';
 import { randomInt } from 'src/app/shared/util/randomInt';
 import { BookDto, MAX_RATING } from '../../models/Book';

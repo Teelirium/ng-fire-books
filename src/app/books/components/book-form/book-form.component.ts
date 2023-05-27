@@ -1,17 +1,14 @@
 import { Component, inject } from '@angular/core';
-import { docData } from '@angular/fire/firestore';
 import {
   AbstractControl,
   FormArray,
-  FormBuilder,
   FormControl,
   FormGroup,
   ValidationErrors,
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { BookDto, BookFormDto, MAX_RATING } from 'src/app/books/models/Book';
+import { BookFormDto, MAX_RATING } from 'src/app/books/models/Book';
 import { BooksService } from '../../services/books.service';
 import { isValidISBN } from '../../util/isValidISBN';
 

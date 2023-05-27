@@ -6,7 +6,11 @@ import { ListPageComponent } from './pages/list-page/list-page.component';
 const routes: Routes = [
   { path: '', redirectTo: 'books', pathMatch: 'full' },
   { path: 'books', component: ListPageComponent },
-  { path: 'add', component: AddPageComponent },
+  {
+    path: 'add',
+    loadChildren: () =>
+      import('./pages/add-page/add-page.module').then((m) => m.AddPageModule),
+  },
 ];
 
 @NgModule({

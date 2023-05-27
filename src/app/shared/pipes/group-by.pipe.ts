@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { groupBy, orderBy } from 'lodash';
+import { groupBy } from 'lodash-es';
 
 @Pipe({
   name: 'groupBy',

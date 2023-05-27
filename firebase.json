@@ -1,7 +1,7 @@
 {
   "hosting": {
     "target": "ng-fire-book",
-    "public": "dist/ng-fire-book",
+    "public": "dist/ng-fire-books",
     "ignore": [
       "**/.*"
     ],
