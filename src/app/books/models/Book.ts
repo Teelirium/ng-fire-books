@@ -28,3 +28,11 @@ export type BookDto = z.infer<typeof bookDtoSchema>;
 export const bookFormDtoSchema = bookDtoSchema.omit({ id: true });
 
 export type BookFormDto = z.infer<typeof bookFormDtoSchema>;
+
+export type BookFormValue = {
+  title: string;
+  authors: string[];
+  year: number | null;
+  rating: number | null;
+  ISBN: string | null;
+};

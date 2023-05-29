@@ -28,7 +28,7 @@ export class BookListComponent {
       }
       const currentYear = new Date().getFullYear();
       const oldEnough = books.data.filter((book) => {
-        if (!book.year) return false;
+        if (!book.year) return true;
         return currentYear - book.year >= 3;
       });
       const maxRating = oldEnough.reduce(

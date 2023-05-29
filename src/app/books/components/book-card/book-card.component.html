@@ -14,7 +14,10 @@
     </p>
     <p *ngIf="book.ISBN">{{ book.ISBN.join("-") }}</p>
   </mat-card-content>
-  <mat-card-actions align="start" *ngIf="showDelete">
+  <mat-card-actions align="end" *ngIf="showDelete">
+    <a [routerLink]="'/book/edit/' + book.id" mat-icon-button color="accent"
+      ><mat-icon>edit</mat-icon></a
+    >
     <button
       type="button"
       (click)="deleteBook(book.id)"

@@ -12,14 +12,14 @@ import { MatInputModule } from '@angular/material/input';
 import { BookFormComponent } from 'src/app/books/components/book-form/book-form.component';
 import { BlurryBgComponent } from 'src/app/shared/components/blurry-bg/blurry-bg.component';
 import { SpinnerComponent } from 'src/app/shared/components/spinner/spinner.component';
-import { AddPageRoutingModule } from './add-page-routing.module';
-import { AddPageComponent } from './add-page.component';
+import { FormPageRoutingModule } from './form-page-routing.module';
+import { FormPageComponent } from './form-page.component';
 
 @NgModule({
-  declarations: [AddPageComponent, BookFormComponent],
+  declarations: [FormPageComponent, BookFormComponent],
   imports: [
     CommonModule,
-    AddPageRoutingModule,
+    FormPageRoutingModule,
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
@@ -36,4 +36,4 @@ import { AddPageComponent } from './add-page.component';
     },
   ],
 })
-export class AddPageModule {}
+export class FormPageModule {}
